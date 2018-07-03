@@ -31,11 +31,11 @@
       <div class="row">
         <div class="col-sm-12 main digiteSentença">
           <div>
-            <input type="text" class="form-control sentencaEntrada" value="ababcaaccc" placeholder="Digite a Sentença" aria-describedby="basic-addon2" />
+            <input type="text" class="form-control sentencaEntrada" value="" placeholder="Digite aqui sua Sentença" aria-describedby="basic-addon2" style="width: 50%" />
             <br>
-            <button type="button" class="btn btn-primary insereSentença">Inserir</button>
-            <button type="button" class="btn btn-info executarSentenca" disabled="disabled" onclick="executarPassoaPasso();">Executar</button>
-            <button type="button" class="btn btn-info executarTodaSentenCa" disabled="disabled" onclick="executarTudo();">Executar Toda Sentença</button>
+            <button type="button" class="btn btn-primary insereSentença">Inserir sentença</button>
+            <button type="button" class="btn btn-info executarSentenca" disabled="disabled" onclick="executarPassoaPasso();">Passo a Passo</button>
+            <button type="button" class="btn btn-info executarTodaSentenCa" disabled="disabled" onclick="executarTudo();">Executar Sentença Completa</button>
             <button type="button" class="btn btn-info btnGramaticaSintatico" data-toggle="modal" data-target="#modalGramatica">Gramática</button>
             <button type="button" class="btn btn-info btnTabelaSintatico" onclick="limparTabelaGeracao();" data-toggle="modal" data-target="#modalTable">Gerar Senteça</button>
           </div>
@@ -164,21 +164,21 @@
       </div>
       <div>
         <div class="col-sm-4">
-          <h5>| Gramática</h5>
+          <h5>Gramática</h5>
           <p>| S ::= aBc | cCb</p>
           <p>| A ::= cB | bCc</p>
           <p>| B ::= baA | ε</p>
           <p>| C ::= aAc | caS</p>
         </div>
         <div class="col-sm-4">
-          <h5>| Firtst</h5>
+          <h5>First</h5>
           <p>| S ::= {a, c}</p>
           <p>| A ::= {c ,b}</p>
           <p>| B ::= {b, ε}</p>
           <p>| C ::= {a, c}</p>
         </div>
         <div class="col-sm-4">
-          <h5>| Follow</h5>
+          <h5>Follow</h5>
           <p>| S ::= {$, b, c}</p>
           <p>| A ::= {c}</p>
           <p>| B ::= {c}</p>
