@@ -139,6 +139,10 @@ $(document).ready(function() {
         $('.posicao-0').addClass('letraSublinhada');
     });
 
+    $("#limparTabela").on('click', function(){
+        location.reload();
+    });
+
     $(".limparTabela").click(function() {
         limparCampos();
     });
