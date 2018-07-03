@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="Trabalho de Compiladores">
+  <meta name="author" content="Leonardo Dias Carlotto">
+  <link rel="icon" href="img/ico_analisador.png">
+  <title>Analisador Sintático</title>
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="dashboard.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <h1>Analisador Sintático</h1>
+      </div>
+      <div class="navbar-header">
+      </div>
+      <div class="navbar-header">
+        <a href="https://github.com/CarlottoLeo/analisadorsintatico.github.io/archive/master.zip" class="btn btn-success" title="Download">Download do Analisador <i class="glyphicon glyphicon-ok-circle"><i class="fa fa-download" aria-hidden="true"></i></i></a>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="main digiteSentença">
+      <div class="row">
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control sentencaEntrada" value="" placeholder="Digite a Sentença" aria-describedby="basic-addon2" />
+        </div>
+        <div class="col-sm-6">
+          <button type="button" class="btn btn-success insereSentença">Iniciar Analisador</button>
+          <button type="button" class="btn btn-info btnTabelaSintatico" onclick="limparTabelaGeracao();" data-toggle="modal" data-target="#modalTable">Gerar Senteça</button>
+          <button type="button" class="btn btn-info btnGramaticaSintatico" data-toggle="modal" data-target="#modalGramatica">Exibir Gramática</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="main">
+      <div class="row">
+        <div class="col-sm-6">
+          <table class="table table-hover table-bordered tabela-base">
+            <thead style="background-color: #F5F5F5;">
+              <tr>
+                <td>-</td>
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+                <td>$</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="background-color: #F5F5F5;">S</td>
+                <td id="Sa">S → aBc</td>
+                <td id="Sb">-</td>
+                <td id="Sc">S → cCb</td>
+                <td id="Sv">-</td>
+              </tr>
+              <tr>
+                <td style="background-color: #F5F5F5;">A</td>
+                <td id="Ac">-</td>
+                <td id="Ab">A → bCc</td>
+                <td id="Aa">A → cB</td>
+                <td id="Av">-</td>
+              </tr>
+              <tr>
+                <td style="background-color: #F5F5F5;">B</td>
+                <td id="Ba">-</td>
+                <td id="Bb">B → baA</td>
+                <td id="Bc">B → ε</td>
+                <td id="Bv">-</td>
+              </tr>
+              <tr>
+                <td style="background-color: #F5F5F5;">C</td>
+                <td id="Ca">C → aAc</td>
+                <td id="Cb">-</td>
+                <td id="Cc">C → caS</td>
+                <td id="Cv">-</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <button type="button" class="btn btn-info executarSentenca" disabled="disabled" onclick="executarPassoaPasso();">Passo a Passo</button>
+            <button type="button" class="btn btn-info executarTodaSentenCa" disabled="disabled" onclick="executarTudo();">Executar Toda Sentença</button>
+            <button type="button" class="btn btn-danger btnLimarTabelaSintatico" data-toggle="modal" data-target="#myModal">Limpar</button>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div>
+            <h3>Fila</h3>
+            <div class="filaCararteres">
+              <div class="posicao letraSublinhada">$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="constructTable">
+      <div class="table-responsiv">
+        <br>
+        <table class="table table-bordered table-striped dadosTabela">
+          <thead>
+            <tr>
+              <th>Pilha</th>
+              <th>Entrada</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody class="valoresAcao">
+          </tbody>
+        </table>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Limpar</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <h5>Deseja limpar os dados da tela?</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info limparTabela" data-toggle="modal" data-target="#myModal">Sim</button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Não</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modalGramatica" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Gramática</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <br>
+          <div>
+            <div class="col-sm-4">
+              <h5>Gramática</h5>
+              <p>| S ::= aBc | cCb</p>
+              <p>| A ::= cB | bCc</p>
+              <p>| B ::= baA | ε</p>
+              <p>| C ::= aAc | caS</p>
+            </div>
+            <div class="col-sm-4">
+              <h5>First</h5>
+              <p>| S ::= {a, c}</p>
+              <p>| A ::= {c ,b}</p>
+              <p>| B ::= {b, ε}</p>
+              <p>| C ::= {a, c}</p>
+            </div>
+            <div class="col-sm-4">
+              <h5>Follow</h5>
+              <p>| S ::= {$, b, c}</p>
+              <p>| A ::= {c}</p>
+              <p>| B ::= {c}</p>
+              <p>| C ::= {b, c}</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalGramatica">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modalTable" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Gerar Sentença</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-hover table-bordered tabela-base tabela-geracao-gramatica">
+              <thead style="background-color: #F5F5F5;">
+                <tr>
+                  <td>-</td>
+                  <td>a</td>
+                  <td>b</td>
+                  <td>c</td>
+                  <td>$</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="S">
+                  <td style="background-color: #F5F5F5;">S</td>
+                  <td id="Sa" class="tabela_geradora" data-linha="0" data-col="0">S → aBc</td>
+                  <td id="Sb" class="tabela_geradora" data-linha="0" data-col="1">-</td>
+                  <td id="Sc" class="tabela_geradora" data-linha="0" data-col="2">S → cCb</td>
+                  <td id="Sv" class="tabela_geradora" data-linha="0" data-col="3">-</td>
+                </tr>
+                <tr id="A">
+                  <td style="background-color: #F5F5F5;">A</td>
+                  <td id="Ac" class="tabela_geradora" data-linha="1" data-col="0">-</td>
+                  <td id="Ab" class="tabela_geradora" data-linha="1" data-col="1">A → bCc</td>
+                  <td id="Aa" class="tabela_geradora" data-linha="1" data-col="2">A → cB</td>
+                  <td id="Av" class="tabela_geradora" data-linha="1" data-col="3">-</td>
+                </tr>
+                <tr id="B">
+                  <td style="background-color: #F5F5F5;">B</td>
+                  <td id="Ba" class="tabela_geradora" data-linha="2" data-col="0">-</td>
+                  <td id="Bb" class="tabela_geradora" data-linha="2" data-col="1">B → baA</td>
+                  <td id="Bc" class="tabela_geradora" data-linha="2" data-col="2">B → ε</td>
+                  <td id="Bv" class="tabela_geradora" data-linha="2" data-col="3">-</td>
+                </tr>
+                <tr id="C">
+                  <td style="background-color: #F5F5F5;">C</td>
+                  <td id="Ca" class="tabela_geradora" data-linha="3" data-col="0">C → aAc</td>
+                  <td id="Cb" class="tabela_geradora" data-linha="3" data-col="1">-</td>
+                  <td id="Cc" class="tabela_geradora" data-linha="3" data-col="2">C → caS</td>
+                  <td id="Cv" class="tabela_geradora" data-linha="3" data-col="3">-</td>
+                </tr>
+              </tbody>
+            </table>
+            <label type="text" class="form-control geracao-gramatica" aria-describedby="basic-addon2">S</label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success ok-gerador" data-toggle="modal" data-target="#modalTable">Aplicar</button>
+            <button type="button" class="btn btn-danger" onclick="limparTabelaGeracao();">Limpar Senteça</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <footer class="footer footer-default navbar-fixed-bottom" style="background: #f8f8f8;">
+    <div class="footerPai">
+      <div>
+        <img style="margin-left: 16px;" src="http://www.uri.com.br/mobile/images/logo_uri.png" width="175" height="35" class="d-inline-block align-top" alt="">
+      </div>
+      <div class="">
+        <span>Compiladores - Turma 2014 </span>
+      </div>
+      <div style="margin:10px;">
+        <a style="margin-right:9px; width:230px;" class="btn btn-block btn-social btn-github" target="_blank" href="https://github.com/CarlottoLeo">
+          <span class="fa fa-github"></span> Leonardo Dias Carlotto
+        </a>
+      </div>
+    </div>
+  </footer>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/customSintatico.js"></script>
+</body>
+</html>

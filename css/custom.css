@@ -1,6 +1,4 @@
 .digitePalavra{margin-left: -0.6%;}
-.constructTable  .page-header{margin-bottom: 0; padding-bottom: 0;}
-.constructTable {padding: 2% 0% 0% 2% !important;}
 .valoresTabelaInseridas {display: none;}
 .valoresTabelaBusca {display: none;}
 .palavrasDicionario {width: 65%;}
@@ -12,6 +10,12 @@ table.dadosTabela tbody{height: 300px; overflow: auto;}
     margin-left: 3%;
     font-size: 16px;
     position: absolute;
+}
+.btnTabelaSintatico{
+  margin-left: 10px;
+}
+button{
+	margin: 2px !important;
 }
 .glyphicon{cursor: pointer;}
 
@@ -25,7 +29,7 @@ table.dadosTabela tbody{height: 300px; overflow: auto;}
 .inseridas-lista li{font-weight: initial; border-bottom: 1px solid #E0E0E0; padding: 5px;}
 .inseridas-lista li .glyphicon{color: grey;}
 .inseridas-lista li:last-child{border: none !important;}
-.inseridas-lista{ 
+.inseridas-lista{
 	position: absolute;
 	background-color: #FFF;
 	border: 1px solid #CCC;
@@ -46,7 +50,7 @@ table.dadosTabela tbody{height: 300px; overflow: auto;}
 .fora-dicionario-lista li{font-weight: initial; border-bottom: 1px solid #E0E0E0; padding: 5px;}
 .fora-dicionario-lista li .glyphicon{color: grey;}
 .fora-dicionario-lista li:last-child{border: none !important;}
-.fora-dicionario-lista{ 
+.fora-dicionario-lista{
 	position: absolute;
 	background-color: #FFF;
 	border: 1px solid #CCC;
@@ -56,11 +60,13 @@ table.dadosTabela tbody{height: 300px; overflow: auto;}
 	top: 87%;
 	display: none;
 }
-input, button, .modal-content{border-radius: 0px !important;}
+input, button, .modal-content{
+	border-radius: 0px !important;
+	margin-top: 100px;
+}
 
-/* Semantico */
-.btnLimarTabelaSintatico{
-	float: right;
+.modal{
+	background: #000000bf;
 }
 
 .posicao{
@@ -70,9 +76,10 @@ input, button, .modal-content{border-radius: 0px !important;}
     float: left;
     padding-bottom: 3px;
 }
-.filaCararteres{margin-left: -30px;}
-.btnGramaticaSintatico{margin-left: 15px;}
-.letraSublinhada{border-bottom: 1px solid red;}
+
+.letraSublinhada{
+  background-color: whitesmoke;
+}
 .fixar {
     position:fixed;
     margin-top: 0px !important;

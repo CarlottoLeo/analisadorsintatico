@@ -123,8 +123,9 @@ var saidaAcao = $(".valoresAcao"); //tabela onde serão escritas as ações real
 $(document).ready(function() {
     $(".insereSentença").click(function() {
         limparCampos();
-        $('.executarSentenca').removeAttr('disabled');
-        $('.executarTodaSentenca').removeAttr('disabled');
+        //$('.executarSentenca').removeAttr('disabled');
+        //$('.executarTodaSentenca').removeAttr('disabled');
+        $('button, html [type="button"], [type="reset"], [type="submit"]').removeAttr('disabled');
 
         var sentencaEntrada = $(".sentencaEntrada").val().trim() + "$";
         fila = sentencaEntrada; //adiciona à variavel global fila a sentença digitada
@@ -166,7 +167,7 @@ $(document).ready(function() {
                 $(".tabela-geracao-gramatica tbody tr").css("background-color", "#EF5350");
             }
 
-            if (sentencaGerada[i] === "S" && !naoTerminalNaoAchado) { //se encontrar o S e o nao terminal ainda nao tenha sido encontrado          
+            if (sentencaGerada[i] === "S" && !naoTerminalNaoAchado) { //se encontrar o S e o nao terminal ainda nao tenha sido encontrado
                 $("#S").css("background-color", "#66BB6A");
                 naoTerminalNaoAchado = true;
             }
@@ -215,7 +216,7 @@ function executarPassoaPasso() {
                 "<td>" + fila + "</td>" +
                 "<td> Aceito em: " + contador + " iterações</td>" +
                 "</tr>";
-            saidaAcao.append(maisUmaLinhaTabela); //escreve a Acao feita na tabela      
+            saidaAcao.append(maisUmaLinhaTabela); //escreve a Acao feita na tabela
             executar = false;
 
         } else if (topoPilha === primeiroCharFila) {//Desempilha
@@ -239,12 +240,12 @@ function executarPassoaPasso() {
             var topoPilhaMapa = mapaDePosicoes[topoPilha];
             var primeiroCharFilaMapa = mapaDePosicoes[primeiroCharFila];
             var elementoMatriz = null;
-            
+
             if(topoPilha == 'S' || topoPilha == 'A' || topoPilha == 'B' || topoPilha == 'C'){
                 elementoMatriz = matrizTabela[topoPilhaMapa][primeiroCharFilaMapa];
             }
-            
-            
+
+
             if ( (topoPilha == '$' && primeiroCharFila != '$') || (elementoMatriz == null) ) {//elementoMatriz = para ver se nao tem caracter que nao existe na gramatica, ex D,F
                 var htmlAcao3 = "<tr>" +
                     "<td>" + pilha + "</td>" +
@@ -305,8 +306,8 @@ function executarTudo() {
     var primeiroCharFila = fila.charAt(0);
 
     $('.executarTodaSentenca').attr('disabled', 'disabled');
-    $('.executarSentenca').attr('disabled', 'disabled');    
-    executarPassoaPasso(); 
+    $('.executarSentenca').attr('disabled', 'disabled');
+    executarPassoaPasso();
 
         //Este IF eh para quando termina o passo a passo, ai ele constroe a ultima linha
     if (topoPilha === "$" && primeiroCharFila === "$") {
@@ -343,6 +344,7 @@ function limparCampos() {
     contador = 1;
     executar = true;
     letrasPercoridas = 0;
+    location.reload();
 }
 
 function scrollPage() {
