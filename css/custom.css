@@ -16,6 +16,8 @@ table.dadosTabela tbody{height: 300px; overflow: auto;}
 }
 button{
 	margin: 2px !important;
+}
+button, html [type="button"]{
 	font-size: 12px;
 }
 .glyphicon{cursor: pointer;}
