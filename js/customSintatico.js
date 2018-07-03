@@ -344,7 +344,6 @@ function limparCampos() {
     contador = 1;
     executar = true;
     letrasPercoridas = 0;
-    location.reload();
 }
 
 function scrollPage() {
