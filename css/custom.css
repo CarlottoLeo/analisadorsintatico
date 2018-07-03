@@ -17,7 +17,7 @@ table.dadosTabela tbody{height: 300px; overflow: auto;}
 .modal-header .close {
     font-size: 18px;
 }
-label{font-size: 12px;}
+label, a{font-size: 12px;}
 button{
 	margin: 2px !important;
 }
